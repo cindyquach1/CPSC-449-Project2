@@ -1,0 +1,20 @@
+[2021-03-07 13:25:50,667] DEBUG in root: SELECT * FROM books
+[2021-03-07 15:33:54,084] DEBUG in root: {'username': 'John', 'email': 'john123@gmail.com', 'pw': 'john123@', 'id': 2}
+[2021-03-07 16:02:41,056] DEBUG in root: 0
+[2021-03-07 16:12:25,557] DEBUG in root: 0
+[2021-03-07 16:15:47,961] DEBUG in root: 0
+[2021-03-07 16:22:26,216] DEBUG in root: 0
+[2021-03-07 16:23:36,831] DEBUG in root: 0
+[2021-03-07 16:24:44,318] DEBUG in root: 0
+[2021-03-07 16:25:22,374] DEBUG in root: 0
+[2021-03-07 16:26:28,660] DEBUG in root: [{'id': 1, 'username': 'JohnLegend', 'email': 'JohnLegend@csu.fullerton.edu', 'pw': 'John*123'}]
+[2021-03-07 16:28:17,404] DEBUG in root: [{'id': 2, 'username': 'John', 'email': 'john123@gmail.com', 'pw': 'john123@'}]
+[2021-03-07 16:29:18,532] DEBUG in root: []
+[2021-03-07 16:29:18,532] DEBUG in root: {'username': 'Lucy', 'email': 'lucy456@gmail.com', 'pw': 'password123@', 'id': 3}
+[2021-03-07 16:29:25,460] DEBUG in root: [{'id': 3, 'username': 'Lucy', 'email': 'lucy456@gmail.com', 'pw': 'password123@'}]
+[2021-03-07 16:44:02,312] DEBUG in root: []
+[2021-03-07 16:44:17,734] DEBUG in root: []
+[2021-03-07 16:46:03,174] DEBUG in root: []
+[2021-03-07 16:46:07,986] DEBUG in root: []
+[2021-03-07 16:46:18,674] DEBUG in root: []
+[2021-03-07 16:46:18,674] DEBUG in root: {'username': 'Daniel', 'email': 'daniel@gmail.com', 'pw': 'JohnDaniel123@', 'id': 4}
