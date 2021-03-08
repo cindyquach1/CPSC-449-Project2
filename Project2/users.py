@@ -117,7 +117,7 @@ def createUser(db):
     return user
 
 #   Returns true if the password parameter matches the password stored for the username.
-@post('/users/<username:text>/')
+@post('/users/<username>/')
 def checkPassword(username, db):
     user = request.json
     if not user:
@@ -128,18 +128,18 @@ def checkPassword(username, db):
     if not required_fields <= posted_fields:
         abort(400, f'Missing fields: {required_fields - posted_fields}')
 
-    checkpassword = query(db, 'SELECT * FROM users WHERE username = ? ', [username])
-    logging.debug(user)
-    if not checkpassword['pw']:
-        abort(400, "Incorrect password, try again.")
+    checkPassword = query(db, 'SELECT * FROM users WHERE username = ? AND pw = ?;', [username, user['pw']])
+    logging.debug(checkPassword)
+    if not checkPassword:
+        abort(400, "Your password doesn't match with what we have, try again.")
 
-    return user
+    return f'Your password match with user: {username}'
 
 
 #   Start following a new user.  
-@post('/users/<username:text>/<usernameToFollow>')  
+@post('/users/<username>/<usernameToFollow>')  
 def addFollower(username, usernameToFollow):
-    
+    pass
 
 # removeFollower(username, usernameToRemove)
 #   Stop following a user.
