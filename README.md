@@ -19,12 +19,12 @@ foreman start
 | --------------------------------------------------------------            |     -------------------------------------------------------------------------       |
 | HTTP POST http://localhost:5000/users/ username=? email=? pw=?            | Register a new user account                                                         |
 | HTTP POST http://localhost:5000/users/<username\>/ pw=?                    | Returns true if the password parameter matches the password stored for the username |
-| HTTP POST http://localhost:5000/users/<username>/<usernameToFollow>/      | <username> is now following <usernameToFollow>                                      |
-| HTTP DELETE http://localhost:5000/users/<username>/<usernameToFollow>/    | <username> has unfollowed {usernameToRemove}                                        |
-| HTTP GET http://localhost:5100/timelines/<username>/                      | Returns recent posts from a user                                                    |                
+| HTTP POST http://localhost:5000/users/<username\>/<usernameToFollow\>/      | <username\> is now following <usernameToFollow\>                                      |
+| HTTP DELETE http://localhost:5000/users/<username\>/<usernameToFollow\>/    | <username\> has unfollowed {usernameToRemove}                                        |
+| HTTP GET http://localhost:5100/timelines/<username\>/                      | Returns recent posts from a user                                                    |                
 | HTTP GET http://localhost:5100/timelines/public/                          | Returns recent posts from all users                                                 |
-| HTTP GET http://localhost:5100/timelines/<username>/followings/           | Returns recent posts from all users that this user follows                          |
-| HTTP POST http://localhost:5100/timelines/<username>/ post=?              | Post a new tweet                                                                    |
+| HTTP GET http://localhost:5100/timelines/<username\>/followings/           | Returns recent posts from all users that this user follows                          |
+| HTTP POST http://localhost:5100/timelines/<username\>/ post=?              | Post a new tweet                                                                    |
 
 
 ### 4. Example:
