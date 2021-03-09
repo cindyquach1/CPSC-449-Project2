@@ -5,7 +5,7 @@ import sqlite3
 import re
 
 import bottle
-from bottle import get, post, error, abort, request, response, HTTPResponse
+from bottle import get, post, delete, error, abort, request, response, HTTPResponse
 from bottle.ext import sqlite
 
 # Set up app, plugins, and logging
@@ -117,14 +117,14 @@ def createUser(db):
     return user
 
 #   Returns true if the password parameter matches the password stored for the username.
-@post('/users/<username>/')
+@get('/users/<username>/')
 def checkPassword(username, db):
     user = request.json
     if not user:
         abort(400)
     posted_fields = user.keys()
     required_fields = {'pw'}
-
+    logging.debug(user)
     if not required_fields <= posted_fields:
         abort(400, f'Missing fields: {required_fields - posted_fields}')
 
@@ -135,11 +135,52 @@ def checkPassword(username, db):
 
     return f'Your password match with user: {username}'
 
+def checkuserNameExist(username, db):
+    checkUsername = query(db, 'SELECT * FROM users WHERE username = ?;', [username])
+    if not checkUsername:
+        return False
+    return True
 
 #   Start following a new user.  
-@post('/users/<username>/<usernameToFollow>')  
-def addFollower(username, usernameToFollow):
-    pass
+@post('/users/<username>/<usernameToFollow>/') 
+def addFollower(username, usernameToFollow, db):
 
-# removeFollower(username, usernameToRemove)
+    checkUsername1 = checkuserNameExist(username, db)
+    if not checkUsername1:
+        abort(400, 'Invalid username')
+    
+    checkUsername2 = checkuserNameExist(usernameToFollow, db)
+    if not checkUsername2:
+        abort(400, ' Username not found')
+    
+    try:
+        addAFollower = execute(db,'''
+                INSERT INTO followers(username, usernameToFollow)
+                VALUES(?,?)''',[username, usernameToFollow])
+    except sqlite3.IntegrityError as e:
+        abort(409, str(e))
+    
+    response.status = 201
+    return f"{username} is now following {usernameToFollow}"
+
 #   Stop following a user.
+@delete('/users/<username>/<usernameToRemove>/' )
+def removeFollower(username, usernameToRemove, db):
+
+    checkUsername1 = checkuserNameExist(username, db)
+    if not checkUsername1:
+        abort(400, 'Invalid username')
+    
+    checkUsername = checkuserNameExist(username, db)
+    if not checkUsername:
+        abort(400, 'Invalid username')
+    
+    try:
+        removeAFollower = execute(db,'''
+                DELETE FROM followers
+                WHERE username = ? AND usernameToFollow = ?''',[username, usernameToRemove])
+    except sqlite3.IntegrityError as e:
+        abort(409, str(e))
+    
+    response.status = 201
+    return f"{username} has unfollowed {usernameToRemove}"
