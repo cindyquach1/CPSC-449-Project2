@@ -117,7 +117,7 @@ def createUser(db):
     return user
 
 #   Returns true if the password parameter matches the password stored for the username.
-@get('/users/<username>/')
+@post('/users/<username>/')
 def checkPassword(username, db):
     user = request.json
     if not user:

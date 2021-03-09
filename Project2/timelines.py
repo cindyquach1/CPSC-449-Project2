@@ -105,22 +105,13 @@ def getHomeTimeline(username, db):
     
     checkUsername1 = checkuserNameExist(username, db)
     if not checkUsername1:
-        abort(400, 'Invalid Username')
-
-    # followingsPosts = query(db, '''SELECT * 
-    #                             FROM posts 
-    #                             WHERE username IN ( 
-    #                                 SELECT usernameToFollow 
-    #                                 FROM followers 
-    #                                 WHERE username = ?)''', [username])
-                                
+        abort(400, 'Invalid Username')                             
 
     followingsPosts = query(db, '''SELECT DISTINCT *
                                     FROM posts
                                     INNER JOIN followers ON posts.username=followers.usernameToFollow
                                     WHERE followers.username = ?
-                                    ORDER BY timestamp DESC LIMIT 2;''', [username])
-
+                                    ORDER BY timestamp DESC LIMIT 25;''', [username])
 
     return {'followingsPosts':followingsPosts}
 
