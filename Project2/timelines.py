@@ -10,7 +10,7 @@ from bottle.ext import sqlite
 # Set up app, plugins, and logging
 #
 app = bottle.default_app()
-app.config.load_config('./etc/api.ini')
+app.config.load_config('./etc/timelines.ini')
 
 plugin = sqlite.Plugin(app.config['sqlite.dbfile'])
 app.install(plugin)
@@ -80,14 +80,14 @@ def checkuserNameExist(username, db):
 # Returns recent posts from a user.
 @get('/timelines/<username>/')
 def getUserTimeline(username, db):
-
+    logging.debug(username)
     checkUsername = checkuserNameExist(username, db)
     if not checkUsername:
         abort(400, 'Invalid Username')
-        
+    logging.debug(checkUsername)    
     userPosts = query(db, 'SELECT * FROM posts WHERE username = ? ORDER BY timestamp DESC LIMIT 25;', [username])
-    
-    return {"{username}'s Timeline"}
+    logging.debug(userPosts)
+    return {f"{username}'s Timeline" : userPosts}
 
 
 #   Returns recent posts from all users.
@@ -100,18 +100,29 @@ def getPublicTimeline(db):
 
 
 #   Returns recent posts from all users that this user follows.
-@get('/timelines/<username>/<usernameFollowings>/')
-def getHomeTimeline(username, usernameFollowings, db):
+@get('/timelines/<username>/followings/')
+def getHomeTimeline(username, db):
     
-    checkUsername = checkuserNameExist(username, db)
-    if not checkUsername:
+    checkUsername1 = checkuserNameExist(username, db)
+    if not checkUsername1:
         abort(400, 'Invalid Username')
 
-    checkUsername = checkuserNameExist(usernameFollowings, db)
-    if not checkUsername:
-        abort(400, 'Username Not Found')
+    # followingsPosts = query(db, '''SELECT * 
+    #                             FROM posts 
+    #                             WHERE username IN ( 
+    #                                 SELECT usernameToFollow 
+    #                                 FROM followers 
+    #                                 WHERE username = ?)''', [username])
+                                
 
-    
+    followingsPosts = query(db, '''SELECT DISTINCT *
+                                    FROM posts
+                                    INNER JOIN followers ON posts.username=followers.usernameToFollow
+                                    WHERE followers.username = ?
+                                    ORDER BY timestamp DESC LIMIT 2;''', [username])
+
+
+    return {'followingsPosts':followingsPosts}
 
 
 #   Post a new tweet.
@@ -135,7 +146,7 @@ def postTweet(username, db):
     try:
         addPost = execute(db,'''
                 INSERT INTO posts(username, post)
-                VALUES(?,?)''',[username, user['post'])
+                VALUES(?,?)''',[username, user['post']])
     except sqlite3.IntegrityError as e:
         abort(409, str(e))
 
