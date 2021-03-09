@@ -18,7 +18,7 @@ foreman start
 |   HTTP Methods                                                            |                                   Descriptions                                      |
 | --------------------------------------------------------------            |     -------------------------------------------------------------------------       |
 | HTTP POST http://localhost:5000/users/ username=? email=? pw=?            | Register a new user account                                                         |
-| HTTP POST http://localhost:5000/users/\<username\>/ pw=?                    | Returns true if the password parameter matches the password stored for the username |
+| HTTP POST http://localhost:5000/users/<username\>/ pw=?                    | Returns true if the password parameter matches the password stored for the username |
 | HTTP POST http://localhost:5000/users/<username>/<usernameToFollow>/      | <username> is now following <usernameToFollow>                                      |
 | HTTP DELETE http://localhost:5000/users/<username>/<usernameToFollow>/    | <username> has unfollowed {usernameToRemove}                                        |
 | HTTP GET http://localhost:5100/timelines/<username>/                      | Returns recent posts from a user                                                    |                
