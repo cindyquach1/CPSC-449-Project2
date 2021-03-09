@@ -15,12 +15,13 @@ INSERT INTO users VALUES('MileyCyrus', 'MileyCyrus@csu.fullerton.edu', 'Miley*12
 INSERT INTO users VALUES('ElonMusk', 'ElonMusk@csu.fullerton.edu', 'Elon*123');
 
 CREATE TABLE IF NOT EXISTS followers (
-    id                  INTEGER PRIMARY KEY,
+    id                  INTEGER,
     username            TEXT NOT NULL,
     usernameToFollow    TEXT NOT NULL,
 
     FOREIGN KEY(username) REFERENCES users(username),
     FOREIGN KEY(usernameToFollow) REFERENCES users(username),
+    FOREIGN KEY(id) REFERENCES posts(id),
     UNIQUE(username, usernameToFollow)
 );
 
