@@ -116,7 +116,7 @@ http --verbose GET http://localhost:5100/timelines/public/
 
 4.7 Returns recent posts from all users that this user follows.
 - Sample request:
-http --verbose GET http://localhost:5100/timelines/JohnLegend/TaylorSwift/
+http --verbose GET http://localhost:5100/timelines/JohnLegend/
 - Sample response:
 Response status: 201
 ```
@@ -124,22 +124,22 @@ Response status: 201
 {
     followingsPosts: {
         "id": 5,
-        "email": "tomvo@gmail.com",
-        "pw": "Tom*123",
+        "email": "JohnLegend@gmail.com",
+        "pw": "John*123",
         "username": "JohnLegend",
         "post": "Hello World!",
         "usernameToFollow": "TaylorSwift";
 
         "id": 5,
-        "email": "tomvo@gmail.com",
-        "pw": "Tom*123",
+        "email": "JohnLegend@gmail.com",
+        "pw": "John*123",
         "username": "JohnLegend",
         "post": "It's a beautiful day!", 
          "usernameToFollow": "BrunoMars"; 
         
         "id": 1,
-        "email": "janedo@gmail.com",
-        "pw": "rustictable^345",
+        "email": "JohnLegend@gmail.com",
+        "pw": "John*123",
         "username": "JohnLegend",
         "post": "Just got some coffee!",
         "usernameToFollow": "BrunoMars";
@@ -158,7 +158,7 @@ TomVo's Timeline: {
         "email": "johnlegend@gmail.com",
         "pw": "John*123",
         "username": "JohnLegend",
-        "post": "449 is a challenge";    
+        "post": "449 is challenge";    
 }
 ```
 JohnLegend just tweeted!
