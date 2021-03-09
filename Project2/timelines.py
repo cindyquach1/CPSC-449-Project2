@@ -70,15 +70,75 @@ def execute(db, sql, args=()):
     return id
 
 
+# Check if username exists
+def checkuserNameExist(username, db):
+    checkUsername = query(db, 'SELECT * FROM users WHERE username = ?;', [username])
+    if not checkUsername:
+        return False
+    return True
+
 # Returns recent posts from a user.
-# def getUserTimeline(username):
+@get('/timelines/<username>/')
+def getUserTimeline(username, db):
+
+    checkUsername = checkuserNameExist(username, db)
+    if not checkUsername:
+        abort(400, 'Invalid Username')
+        
+    userPosts = query(db, 'SELECT * FROM posts WHERE username = ? ORDER BY timestamp DESC LIMIT 25;', [username])
+    
+    return {"{username}'s Timeline"}
 
 
-
-
-# getPublicTimeline()
 #   Returns recent posts from all users.
-# getHomeTimeline(username)
+@get('/timelines/public/')
+def getPublicTimeline(db):
+    
+    allPosts = query(db, 'SELECT * FROM posts ORDER BY timestamp DESC LIMIT 25;')
+
+    return {'Public Timeline': allPosts}
+
+
 #   Returns recent posts from all users that this user follows.
-# postTweet(username, text)
+@get('/timelines/<username>/<usernameFollowings>/')
+def getHomeTimeline(username, usernameFollowings, db):
+    
+    checkUsername = checkuserNameExist(username, db)
+    if not checkUsername:
+        abort(400, 'Invalid Username')
+
+    checkUsername = checkuserNameExist(usernameFollowings, db)
+    if not checkUsername:
+        abort(400, 'Username Not Found')
+
+    
+
+
 #   Post a new tweet.
+@post('/timelines/<username>/')
+def postTweet(username, db):
+    user = request.json
+    #logging.debug(user)
+    if not user:
+        abort(400)
+
+    posted_fields = user.keys()
+    required_fields = {'post'}
+
+    if not required_fields <= posted_fields:
+        abort(400, f'Missing fields: {required_fields - posted_fields}')
+
+    checkUsername = checkuserNameExist(username, db)
+    if not checkUsername:
+        abort(400, 'Invalid username')
+    
+    try:
+        addPost = execute(db,'''
+                INSERT INTO posts(username, post)
+                VALUES(?,?)''',[username, user['post'])
+    except sqlite3.IntegrityError as e:
+        abort(409, str(e))
+
+    response.status = 201
+    return f"{username} just tweeted!"
+
