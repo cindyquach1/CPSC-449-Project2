@@ -100,20 +100,23 @@ def getPublicTimeline(db):
 
 
 #   Returns recent posts from all users that this user follows.
-@get('/timelines/<username>/followings/')
+@get('/timelines/<username>/')
 def getHomeTimeline(username, db):
-    
-    checkUsername1 = checkuserNameExist(username, db)
-    if not checkUsername1:
-        abort(400, 'Invalid Username')                             
 
-    followingsPosts = query(db, '''SELECT DISTINCT *
-                                    FROM posts
-                                    INNER JOIN followers ON posts.username=followers.usernameToFollow
-                                    WHERE followers.username = ?
-                                    ORDER BY timestamp DESC LIMIT 25;''', [username])
+    # checkUsername1 = checkuserNameExist(username, db)
+    # if not checkUsername1:
+    #     abort(400, 'Invalid Username')    
 
-    return {'followingsPosts':followingsPosts}
+    users = query(db, '''SELECT id FROM users
+                            WHERE username = ? ''', [username])
+                            
+    logging.debug(users)
+
+    # followingsPosts = query(db, '''SELECT post FROM posts
+    #                                 WHERE username = ?
+    #                                 ORDER BY timestamp DESC LIMIT 25;''', [username])
+
+    # return {'followingsPosts':followingsPosts}
 
 
 #   Post a new tweet.

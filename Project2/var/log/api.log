@@ -18,3 +18,6 @@
 [2021-03-07 16:46:07,986] DEBUG in root: []
 [2021-03-07 16:46:18,674] DEBUG in root: []
 [2021-03-07 16:46:18,674] DEBUG in root: {'username': 'Daniel', 'email': 'daniel@gmail.com', 'pw': 'JohnDaniel123@', 'id': 4}
+[2021-05-25 21:40:57,585] DEBUG in root: JohnLegend
+[2021-05-25 21:46:46,876] DEBUG in root: JohnLegend
+[2021-05-25 21:47:22,466] DEBUG in root: JohnLegend
