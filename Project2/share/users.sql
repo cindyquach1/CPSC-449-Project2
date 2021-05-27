@@ -12,29 +12,27 @@ CREATE TABLE IF NOT EXISTS users (
 INSERT INTO users VALUES(1, 'JohnLegend', 'JohnLegend@csu.fullerton.edu', 'John*123');
 INSERT INTO users VALUES(2, 'TaylorSwift', 'TaylorSwift@gmail.com', 'Taylor*123');
 INSERT INTO users VALUES(3, 'BrunoMars', 'BrunoMars@csu.fullerton.edu', 'Bruno*123');
+INSERT INTO users VALUES(4, 'MileyCyrus', 'MileyCyrus@csu.fullerton.edu', 'Miley*123');
+INSERT INTO users VALUES(5, 'ElonMusk', 'ElonMusk@csu.fullerton.edu', 'Elon*123');
 
 CREATE TABLE IF NOT EXISTS followers (
-    id              INTEGER PRIMARY KEY,
-    follower_id     INTEGER NOT NULL,
-    following_id    INTEGER NOT NULL,
+     id                  INTEGER PRIMARY KEY,
+     username            TEXT NOT NULL,
+     usernameToFollow    TEXT NOT NULL,
 
-    FOREIGN KEY(follower_id) REFERENCES users(id),
-    FOREIGN KEY(following_id) REFERENCES users(id),
-    UNIQUE(follower_id, following_id)
-);
+     FOREIGN KEY(username) REFERENCES users(username),
+     FOREIGN KEY(usernameToFollow) REFERENCES users(username),
+     UNIQUE(username, usernameToFollow)
+ );
 
-INSERT INTO followers(follower_id, following_id) VALUES(1, 2);
-INSERT INTO followers(follower_id, following_id) VALUES(1, 3);
-INSERT INTO followers(follower_id, following_id) VALUES(2, 1);
-INSERT INTO followers(follower_id, following_id) VALUES(2, 3);
-INSERT INTO followers(follower_id, following_id) VALUES(3, 2);
-
-CREATE VIEW IF NOT EXISTS following
-AS
-    SELECT users.username, friends.username as friendname
-    FROM users, followers, users AS friends
-    WHERE
-        users.id = followers.follower_id AND
-        followers.following_id = friends.id;
+ INSERT INTO followers(username, usernameToFollow) VALUES('JohnLegend', 'TaylorSwift');
+ INSERT INTO followers(username, usernameToFollow) VALUES('JohnLegend', 'BrunoMars');
+ INSERT INTO followers(username, usernameToFollow) VALUES('TaylorSwift', 'JohnLegend');
+ INSERT INTO followers(username, usernameToFollow) VALUES('TaylorSwift', 'BrunoMars');
+ INSERT INTO followers(username, usernameToFollow) VALUES('TaylorSwift', 'MileyCyrus');
+ INSERT INTO followers(username, usernameToFollow) VALUES('BrunoMars', 'MileyCyrus');
+ INSERT INTO followers(username, usernameToFollow) VALUES('MileyCyrus', 'JohnLegend');
+ INSERT INTO followers(username, usernameToFollow) VALUES('MileyCyrus', 'ElonMusk');
+ INSERT INTO followers(username, usernameToFollow) VALUES('ElonMusk', 'MileyCyrus');
 
 COMMIT;

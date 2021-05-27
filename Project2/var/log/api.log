@@ -21,3 +21,22 @@
 [2021-05-25 21:40:57,585] DEBUG in root: JohnLegend
 [2021-05-25 21:46:46,876] DEBUG in root: JohnLegend
 [2021-05-25 21:47:22,466] DEBUG in root: JohnLegend
+[2021-05-26 18:50:26,089] DEBUG in root: [{'post': 'You belong with me'}]
+[2021-05-26 18:51:52,734] DEBUG in root: [{'username': 'TaylorSwift', 'post': 'You belong with me'}]
+[2021-05-26 18:55:19,305] DEBUG in root: [[{'username': 'TaylorSwift', 'post': 'You belong with me'}], [{'username': 'BrunoMars', 'post': 'Locked out of heaven'}]]
+[2021-05-26 18:55:47,000] DEBUG in root: [[{'username': 'TaylorSwift', 'post': 'You belong with me'}], [{'username': 'BrunoMars', 'post': 'Locked out of heaven'}]]
+[2021-05-26 18:58:25,968] DEBUG in root: JohnLegend
+[2021-05-26 19:01:10,115] DEBUG in root: JohnLegend
+[2021-05-26 19:01:10,115] DEBUG in root: [{'id': 1, 'username': 'JohnLegend', 'post': 'All of me', 'timestamp': '2021-05-26 22:10:44'}]
+[2021-05-26 19:10:23,351] DEBUG in root: JohnLegend
+[2021-05-26 19:10:23,352] DEBUG in root: [{'id': 5, 'username': 'JohnLegend', 'post': 'Love me now', 'timestamp': '2021-05-27 02:04:56'}, {'id': 4, 'username': 'JohnLegend', 'post': 'Conversations in the dark', 'timestamp': '2021-05-27 02:02:42'}, {'id': 1, 'username': 'JohnLegend', 'post': 'All of me', 'timestamp': '2021-05-26 22:10:44'}]
+[2021-05-26 19:11:50,366] DEBUG in root: [[{'username': 'TaylorSwift', 'post': 'You belong with me'}]]
+[2021-05-26 19:12:57,150] DEBUG in root: [[{'username': 'JohnLegend', 'post': 'All of me'}, {'username': 'JohnLegend', 'post': 'Conversations in the dark'}, {'username': 'JohnLegend', 'post': 'Love me now'}]]
+[2021-05-26 19:20:41,541] DEBUG in root: []
+[2021-05-26 19:20:48,807] DEBUG in root: []
+[2021-05-26 19:21:22,010] DEBUG in root: {'pw': 'John*123'}
+[2021-05-26 19:21:22,010] DEBUG in root: [{'id': 1, 'username': 'JohnLegend', 'email': 'JohnLegend@csu.fullerton.edu', 'pw': 'John*123'}]
+[2021-05-26 19:23:45,812] DEBUG in root: JohnLegend
+[2021-05-26 19:23:45,812] DEBUG in root: [{'id': 1, 'username': 'JohnLegend', 'post': 'All of me', 'timestamp': '2021-05-27 02:19:04'}]
+[2021-05-26 19:32:19,278] DEBUG in root: JohnLegend
+[2021-05-26 19:32:19,278] DEBUG in root: [{'id': 4, 'username': 'JohnLegend', 'post': 'Conversations in the dark', 'timestamp': '2021-05-27 02:29:45'}, {'id': 1, 'username': 'JohnLegend', 'post': 'All of me', 'timestamp': '2021-05-27 02:19:04'}]

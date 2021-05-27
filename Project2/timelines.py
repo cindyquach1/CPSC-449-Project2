@@ -70,22 +70,13 @@ def execute(db, sql, args=()):
     return id
 
 
-# Check if username exists
-def checkuserNameExist(username, db):
-    checkUsername = query(db, 'SELECT * FROM users WHERE username = ?;', [username])
-    if not checkUsername:
-        return False
-    return True
-
 # Returns recent posts from a user.
 @get('/timelines/<username>/')
 def getUserTimeline(username, db):
     logging.debug(username)
-    checkUsername = checkuserNameExist(username, db)
-    if not checkUsername:
-        abort(400, 'Invalid Username')
-    logging.debug(checkUsername)    
-    userPosts = query(db, 'SELECT * FROM posts WHERE username = ? ORDER BY timestamp DESC LIMIT 25;', [username])
+ 
+    userPosts = query(db, '''SELECT * FROM posts 
+                            WHERE username = ? ORDER BY timestamp DESC LIMIT 25;''', [username])
     logging.debug(userPosts)
     return {f"{username}'s Timeline" : userPosts}
 
@@ -100,30 +91,35 @@ def getPublicTimeline(db):
 
 
 #   Returns recent posts from all users that this user follows.
-@get('/timelines/<username>/')
+@get('/timelines/<username>/followings/')
 def getHomeTimeline(username, db):
+    following_list = request.json
+    if not following_list:
+        abort(400)
+    
+    posted_fields = following_list.keys()
+    required_fields = {'follow_list'}
 
-    # checkUsername1 = checkuserNameExist(username, db)
-    # if not checkUsername1:
-    #     abort(400, 'Invalid Username')    
-
-    users = query(db, '''SELECT id FROM users
-                            WHERE username = ? ''', [username])
+    if not required_fields <= posted_fields:
+        abort(400, f'Missing fields: {required_fields - posted_fields}')
+   
+    temp_users = following_list['follow_list']
+    users_posts = []
+    for temp_user in temp_users:
+        u_posts = query(db, '''SELECT username, post FROM posts
+                            WHERE username = ? ''',[temp_user])
+        if u_posts:
+            users_posts.append(u_posts)
                             
-    logging.debug(users)
+    logging.debug(users_posts)
 
-    # followingsPosts = query(db, '''SELECT post FROM posts
-    #                                 WHERE username = ?
-    #                                 ORDER BY timestamp DESC LIMIT 25;''', [username])
-
-    # return {'followingsPosts':followingsPosts}
+    return {'followingsPosts':users_posts}
 
 
 #   Post a new tweet.
 @post('/timelines/<username>/')
 def postTweet(username, db):
     user = request.json
-    #logging.debug(user)
     if not user:
         abort(400)
 
@@ -133,10 +129,6 @@ def postTweet(username, db):
     if not required_fields <= posted_fields:
         abort(400, f'Missing fields: {required_fields - posted_fields}')
 
-    checkUsername = checkuserNameExist(username, db)
-    if not checkUsername:
-        abort(400, 'Invalid username')
-    
     try:
         addPost = execute(db,'''
                 INSERT INTO posts(username, post)

@@ -71,19 +71,20 @@ http --verbose GET http://localhost:5100/timelines/JohnLegend/
 Response status: 201
 ```
 {
-    JohnLegend's Timeline: {
-        "id": 5,
-        "email": "JohnLegend@gmail.com",
-        "pw": "John*123",
-        "username": "JohnLegend",
-        "post": "Hello World!";
-
-        "id": 5,
-        "email": "JohnLegend@gmail.com",
-        "pw": "John*123",
-        "username": "JohnLegend",
-        "post": "It's a beautiful day!";      
-    }
+    "JohnLegend's Timeline": [
+        {
+            "id": 4,
+            "post": "Conversations in the dark",
+            "timestamp": "2021-05-27 02:29:45",
+            "username": "JohnLegend"
+        },
+        {
+            "id": 1,
+            "post": "All of me",
+            "timestamp": "2021-05-27 02:19:04",
+            "username": "JohnLegend"
+        }
+    ]
 }
 ```
 
@@ -92,58 +93,64 @@ Response status: 201
 http --verbose GET http://localhost:5100/timelines/public/
 ```
 {
-    Public Timeline: {
-        "id": 5,
-        "email": "johnlegend@gmail.com",
-        "pw": "John*123",
-        "username": "JohnLegend",
-        "post": "Hello World!";
-
-        "id": 3,
-        "email": "andrewdo@gmail.com",
-        "pw": "Flyingcarts764!",
-        "username": "AndrewDo",
-        "post": "Going shopping today.";
-
-        "id": 1,
-        "email": "janedo@gmail.com",
-        "pw": "Rustictable^345",
-        "username": "JaneDo",
-        "post": "Just got some coffee!";      
-    }
+    "Public Timeline": [
+        {
+            "id": 5,
+            "post": "Love me now",
+            "timestamp": "2021-05-27 02:04:56",
+            "username": "JohnLegend"
+        },
+        {
+            "id": 4,
+            "post": "Conversations in the dark",
+            "timestamp": "2021-05-27 02:02:42",
+            "username": "JohnLegend"
+        },
+        {
+            "id": 3,
+            "post": "Locked out of heaven",
+            "timestamp": "2021-05-26 22:10:44",
+            "username": "BrunoMars"
+        },
+        {
+            "id": 2,
+            "post": "You belong with me",
+            "timestamp": "2021-05-26 22:10:44",
+            "username": "TaylorSwift"
+        },
+        {
+            "id": 1,
+            "post": "All of me",
+            "timestamp": "2021-05-26 22:10:44",
+            "username": "JohnLegend"
+        }
+    ]
 }
 ``` 
 
 4.7 Returns recent posts from all users that this user follows.
 - Sample request:
-http --verbose GET http://localhost:5100/timelines/JohnLegend/
+http --verbose GET http://localhost:5100/timelines/BrunoMars/followings/ follow_list:='["JohnLegend"]'
 - Sample response:
-Response status: 201
+Response status: 200 OK
 ```
-
 {
-    followingsPosts: {
-        "id": 5,
-        "email": "JohnLegend@gmail.com",
-        "pw": "John*123",
-        "username": "JohnLegend",
-        "post": "Hello World!",
-        "usernameToFollow": "TaylorSwift";
-
-        "id": 5,
-        "email": "JohnLegend@gmail.com",
-        "pw": "John*123",
-        "username": "JohnLegend",
-        "post": "It's a beautiful day!", 
-         "usernameToFollow": "BrunoMars"; 
-        
-        "id": 1,
-        "email": "JohnLegend@gmail.com",
-        "pw": "John*123",
-        "username": "JohnLegend",
-        "post": "Just got some coffee!",
-        "usernameToFollow": "BrunoMars";
-    }
+    "followingsPosts": [
+        [
+            {
+                "post": "All of me",
+                "username": "JohnLegend"
+            },
+            {
+                "post": "Conversations in the dark",
+                "username": "JohnLegend"
+            },
+            {
+                "post": "Love me now",
+                "username": "JohnLegend"
+            }
+        ]
+    ]
 }
 ```
 
