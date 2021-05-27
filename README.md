@@ -23,9 +23,8 @@ foreman start
 | HTTP DELETE http://localhost:5000/users/<username\>/<usernameToFollow\>/    | <username\> has unfollowed {usernameToRemove}                                        |
 | HTTP GET http://localhost:5100/timelines/<username\>/                      | Returns recent posts from a user                                                    |                
 | HTTP GET http://localhost:5100/timelines/public/                          | Returns recent posts from all users                                                 |
-| HTTP GET http://localhost:5100/timelines/<username\>/followings/           | Returns recent posts from all users that this user follows                          |
+| HTTP GET http://localhost:5100/timelines/<username>/followings/ follow_list=?           | Returns recent posts from all users that this user follows                          |
 | HTTP POST http://localhost:5100/timelines/<username\>/ post=?              | Post a new tweet                                                                    |
-
 
 ### 4. Example:
 4.1 Register a new account:
@@ -130,12 +129,12 @@ http --verbose GET http://localhost:5100/timelines/public/
 
 4.7 Returns recent posts from all users that this user follows.
 - Sample request:
-http --verbose GET http://localhost:5100/timelines/BrunoMars/followings/ follow_list:='["JohnLegend"]'
+http --verbose GET http://localhost:5100/timelines/BrunoMars/followings/ follow_list:='["JohnLegend","TaylorSwift"]'
 - Sample response:
 Response status: 200 OK
 ```
 {
-    "followingsPosts": [
+    "BrunoMars's Followings Timeline": [
         [
             {
                 "post": "All of me",
@@ -144,10 +143,12 @@ Response status: 200 OK
             {
                 "post": "Conversations in the dark",
                 "username": "JohnLegend"
-            },
+            }
+        ],
+        [
             {
-                "post": "Love me now",
-                "username": "JohnLegend"
+                "post": "You belong with me",
+                "username": "TaylorSwift"
             }
         ]
     ]

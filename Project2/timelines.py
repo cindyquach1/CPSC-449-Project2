@@ -113,7 +113,7 @@ def getHomeTimeline(username, db):
                             
     logging.debug(users_posts)
 
-    return {'followingsPosts':users_posts}
+    return {f"{username}'s Followings Timeline" :users_posts}
 
 
 #   Post a new tweet.

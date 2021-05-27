@@ -40,3 +40,5 @@
 [2021-05-26 19:23:45,812] DEBUG in root: [{'id': 1, 'username': 'JohnLegend', 'post': 'All of me', 'timestamp': '2021-05-27 02:19:04'}]
 [2021-05-26 19:32:19,278] DEBUG in root: JohnLegend
 [2021-05-26 19:32:19,278] DEBUG in root: [{'id': 4, 'username': 'JohnLegend', 'post': 'Conversations in the dark', 'timestamp': '2021-05-27 02:29:45'}, {'id': 1, 'username': 'JohnLegend', 'post': 'All of me', 'timestamp': '2021-05-27 02:19:04'}]
+[2021-05-26 20:02:33,365] DEBUG in root: [[{'username': 'JohnLegend', 'post': 'All of me'}, {'username': 'JohnLegend', 'post': 'Conversations in the dark'}]]
+[2021-05-26 20:02:48,433] DEBUG in root: [[{'username': 'JohnLegend', 'post': 'All of me'}, {'username': 'JohnLegend', 'post': 'Conversations in the dark'}], [{'username': 'TaylorSwift', 'post': 'You belong with me'}]]
